@@ -53,14 +53,29 @@ with open(csvpath) as budget_data_file:
 
 
     #Printing values
-    print("----------------------------------------------------")
+    print("-------------------------------------------------------")
     print("Financial Analysis")
-    print("----------------------------------------------------")
+    print("-------------------------------------------------------")
     print(f"Total Months: {total_months}")
     print(f"Total: ${net_total_amount}")
     print(f"Average  Change: $ {averagechange}")
     print(f"Greatest Increase in Profits: {greatestincreasemonth} (${greatestincrease})")
     print(f"Greatest Decrease in Profits: {greatestdecreasemonth} (${greatestdecrease})")
-    print("----------------------------------------------------")
+    print("-------------------------------------------------------")
+
+# Save the analysis to text file
+
+filepathtosave = os.path.join("analysis","budget_data_analysis.txt")
+with open(filepathtosave,'w') as text:
+    text.write("-------------------------------------------------------" + "\n")
+    text.write("Financial Analysis" + "\n")
+    text.write("-------------------------------------------------------" + "\n")
+    text.write(f"Total Months: {total_months}" + "\n")
+    text.write(f"Total: ${net_total_amount}" + "\n")
+    text.write(f"Average  Change: $ {averagechange}" + "\n")
+    text.write(f"Greatest Increase in Profits: {greatestincreasemonth} (${greatestincrease})" + "\n")
+    text.write(f"Greatest Decrease in Profits: {greatestdecreasemonth} (${greatestdecrease})" + "\n")  
+    text.write("-------------------------------------------------------")  
+
 
      
