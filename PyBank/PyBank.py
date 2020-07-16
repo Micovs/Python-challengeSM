@@ -14,32 +14,53 @@ with open(csvpath) as budget_data_file:
 
     # Reading and skipping the header row 
     csv_header = next(csvreader)
-    # print(f"CSV Header: {csv_header}")
 
     #setting initial counts    
     total_months=0
     net_total_amount=0
     plvalues=[]
-    # for loop to loop thtouh the file by rows
+    # loop thtouh the file by rows
     for row in csvreader:
         total_months+=1
         net_total_amount = net_total_amount + int(row[1])
 
         #creating a list of Profit/Losses values, used later to... 
         #...calculate the month to month diference
-        plvalues.append(row[1])
-    
-    #creating a lits, containing the month to month diference 
-    output=[]
+        plvalues.append([row[0],row[1]])
+        
+    #creating a lits, containing the month to month diference, 
+    outputsum=[]
+    #creating a dictionary with the assosiated month as a key 
+    output={}
+
     for index,element in enumerate(plvalues[1:]):
-        output.append(int(element)-int(plvalues[index]))
+        output.update({element[0]:int(element[1])-int(plvalues[index][1])})
+        outputsum.append(int(element[1])-int(plvalues[index][1]))
 
     #calculating Average Change
-    averagechange=sum(output)/len(output)
+    averagechange = sum(outputsum) / len(outputsum)
     #Formating average Change to 2 decimals
-    averagechange=round(averagechange,2)       
-        
+    averagechange = round (averagechange,2)
+    #Finding Greates increase in profits
+    greatestincrease = max(outputsum) 
+    #Finding Greates decreases in profits
+    greatestdecrease = min(outputsum)      
+    #Finding the month assosiated with the Greatest increase
+    greatestincreasemonth = max(output,key=output.get)
+    #Finding the month assosiated with the Greatest decrease
+    greatestdecreasemonth = min(output,key=output.get)
+    
+
+
     #Printing values
+    print("----------------------------------------------------")
+    print("Financial Analysis")
+    print("----------------------------------------------------")
     print(f"Total Months: {total_months}")
     print(f"Total: ${net_total_amount}")
-    print(f"Average  Change: $ {averagechange}") 
+    print(f"Average  Change: $ {averagechange}")
+    print(f"Greatest Increase in Profits: {greatestincreasemonth} (${greatestincrease})")
+    print(f"Greatest Decrease in Profits: {greatestdecreasemonth} (${greatestdecrease})")
+    print("----------------------------------------------------")
+
+     
