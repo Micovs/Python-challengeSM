@@ -89,7 +89,39 @@ with open(filepathtosave,'w') as text:
     text.write(f"Winner {winnername}" + "\n")  
     text.write("-------------------------" + "\n")
 
+# Additional test, using pandas
 
+# import pandas as pd
+
+# csv_path = "Resources/election_data.csv"
+
+# edata_df = pd.read_csv(csv_path)
+
+# numberofvotes = edata_df["Candidate"].value_counts()
+
+# summary_df = pd.DataFrame(numberofvotes)
+
+# renamed_df = summary_df.rename(columns={"Candidate":"Number of Votes"})
+
+# totalvotes = renamed_df["Number of Votes"].sum()
+
+# Winner = renamed_df["Number of Votes"].max()
+
+# Winnername = renamed_df.loc[renamed_df["Number of Votes"] == Winner, :]
+
+# Percentagewon = renamed_df["Number of Votes"]/totalvotes * 100
+
+# renamed_df["Percentage"]=Percentagewon
+
+# print("-------------------------")
+# print("Election Results")
+# print("-------------------------")
+# print(f"Total Votes:: {totalvotes}")
+# print("-------------------------") 
+# print(renamed_df)
+# print("-------------------------")
+# print(f"Winner is {Winnername}")
+# print("-------------------------")
 
 
     
